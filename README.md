@@ -16,7 +16,7 @@ This is a fully interactive application where user workout details including nam
     Routes handled by Express server
 
 ### Project Repository Link:
-https://github.com/rialee/witness
+https://github.com/rialee/witness-fitness
 
 ### Project Deployed Link:
 
