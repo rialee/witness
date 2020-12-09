@@ -19,6 +19,7 @@ This is a fully interactive application where user workout details including nam
 https://github.com/rialee/witness-fitness
 
 ### Project Deployed Link:
+https://witness-fitness.herokuapp.com/
 
 
 ### License
