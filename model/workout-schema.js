@@ -1,9 +1,9 @@
-const { Schema } = require("mongoose");
+// dependencies
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema
 
 // reference seed file
 const workoutSchema = new Schema(
-
-    
     {
         // date
         day: {
@@ -57,14 +57,15 @@ const workoutSchema = new Schema(
 );
 
 // get total exercised time
-workoutSchema.virtual("totalExercised").get(function () {
-    return this.exercise.reduce((total, exercise) => {
+workoutSchema.virtual("totalDuration").get(function () {
+    return this.exercises.reduce((total, exercise) => {
+
         // sum of duration of all exercises 
         return total + exercise.duration;
-    // start at 0
+        // start at 0
     }, 0);
 });
 
-const workout = mongoose.model("workout", workoutSchema);
+const Workout = mongoose.model("Workout", workoutSchema);
 
-module.exports = workout;
+module.exports = Workout;

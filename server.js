@@ -2,8 +2,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const logger = require("morgan");
-const path = require("path");
-const router = require("./controller/apiRoutes");
 
 // port
 const PORT = 3000;
@@ -22,11 +20,15 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // mongoose connection
-const db = mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", { useNewUrlParser: true });
+const db = mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", 
+{ 
+    useNewUrlParser: true,
+    useFindAndModify: false
+});
 
 // routes
-router.use(require("./controller/apiRoutes.js"));
-router.use(require("./controller/htmlRoutes.js"));
+app.use(require("./controller/apiRoutes.js"));
+app.use(require("./controller/htmlRoutes.js"));
 
 // Listen on port 
 app.listen(PORT, () => {
