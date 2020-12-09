@@ -3,6 +3,10 @@ const express = require("express");
 const mongoose = require("mongoose");
 const logger = require("morgan");
 const path = require("path");
+const router = require("./controller/apiRoutes");
+
+// port
+const PORT = 3000;
 
 // server
 const app = express();
@@ -17,30 +21,14 @@ app.use(express.json());
 // public serve 
 app.use(express.static("public"));
 
-// database setup
-const databaseUrl = "workouts_db";
-const collections = ["workouts"];
-
 // mongoose connection
-const db = mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/custommethoddb", { useNewUrlParser: true });
+const db = mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", { useNewUrlParser: true });
 
 // routes
-// home route
-app.get("/", (req, res) => {
-    res.send(index.html);
-});
+router.use(require("./controller/apiRoutes.js"));
+router.use(require("./controller/htmlRoutes.js"));
 
-// tracker route
-app.get("/exercise", (req, res) => {
-    res.send(exercise.html);
-});
-
-// dashboard route
-app.get("/stats", (req, res) => {
-    res.send(stats.html);
-});
-
-// Listen on port 3000
-app.listen(3000, () => {
-    console.log(`App running on ${3000}`);
+// Listen on port 
+app.listen(PORT, () => {
+    console.log(`App running on ${PORT} !`);
 });
