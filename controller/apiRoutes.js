@@ -67,16 +67,15 @@ router.put("/api/workouts/:id", ({ body, params }, res) => {
 
 
 // GET request workout history for display
-router.put("/api/workouts/range", ({ body }, res) => {
+router.get("/api/workouts/range", (req, res) => {
 
     // find the last entered 7 days of workout
-    Workout.find({}).limit(7)
+    Workout.find().limit(7)
 
         // return res.json
         .then(workoutsData => {
-            console.log(JSON.stringify(workoutsData))
+            console.log(workoutsData)
             res.json(workoutsData);
-
         })
         
         // err handling
