@@ -24,6 +24,21 @@ const collections = ["workouts"];
 // mongoose connection
 const db = mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/custommethoddb", { useNewUrlParser: true });
 
+// routes
+// home route
+app.get("/", (req, res) => {
+    res.send(index.html);
+});
+
+// tracker route
+app.get("/exercise", (req, res) => {
+    res.send(exercise.html);
+});
+
+// dashboard route
+app.get("/stats", (req, res) => {
+    res.send(stats.html);
+});
 
 // Listen on port 3000
 app.listen(3000, () => {
