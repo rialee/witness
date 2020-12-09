@@ -2,7 +2,7 @@
 const router = require("express").Router();
 
 // require model
-const db = require("../model/workout-schema.js");
+const Workout = require("../model/workout-schema.js");
 
 
 
@@ -10,7 +10,7 @@ const db = require("../model/workout-schema.js");
 router.get("/api/workouts", (req, res) => {
 
     // find() all workouts
-   db.Workout.find()
+   Workout.find()
 
         // res,json()
         .then(workoutsData => {
@@ -27,7 +27,7 @@ router.get("/api/workouts", (req, res) => {
 router.post("/api/workouts", ({ body }, res) => {
 
     // create an empty data entry
-    db.Workout.create({})
+    Workout.create({})
 
         // res.json()
         .then(workoutsData => {
@@ -42,10 +42,10 @@ router.post("/api/workouts", ({ body }, res) => {
 
 // update the selected workout id and fill workout info with PUT request
 // add exercise button
-router.put("/api/workours/:id", ({ body }, res) => {
+router.put("/api/workouts/:id", ({ body, params }, res) => {
 
     // get the data by id input (req.params.id)
-    db.Workout.findByIdAndUpdate(req.params.id,
+    Workout.findByIdAndUpdate(params.id,
 
         // update extercise with $push
         { $push: { exercises: body } },
@@ -70,11 +70,11 @@ router.put("/api/workours/:id", ({ body }, res) => {
 router.put("/api/workouts/range", ({ body }, res) => {
 
     // find the last entered 7 days of workout
-    db.Workout.find({}).limit(7)
+    Workout.find({}).limit(7)
 
         // return res.json
         .then(workoutsData => {
-            console.log(workoutsData)
+            console.log(JSON.stringify(workoutsData))
             res.json(workoutsData);
 
         })
@@ -90,7 +90,7 @@ router.delete("/api/workouts", ({ body }, res) => {
 
     // get req.body.id 
     // delete data in db
-    db.Workout.findByIdAndDelete(body.id)
+    Workout.findByIdAndDelete(body.id)
 
         // return res.json()
         .then(() => {
