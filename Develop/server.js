@@ -4,39 +4,28 @@ const mongoose = require("mongoose");
 const logger = require("morgan");
 const path = require("path");
 
-// PORT setup
+// server
 const app = express();
 
-// PORT
-const PORT = process.env.PORT || 3000
-
 // logger
-app.use(logger("development"));
+app.use(logger("dev"));
 
-// middleware
+// request body middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+// public serve 
 app.use(express.static("public"));
 
-// connection
-mongoose.connect(
-    process.env.MONGODB_URI || "mongodb://localhost/workout",
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useCreateIndex: true,
-      useFindAndModify: false
-    }
-    );
+// database setup
+const databaseUrl = "workouts_db";
+const collections = ["workouts"];
 
-// routing
-app.get("/", function (){
-    res.send("server testing")
-})
-// app.use(require("./routes/html-routes.js"))
+// mongoose connection
+const db = mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/custommethoddb", { useNewUrlParser: true });
 
-// start server and listen on PORT
-app.listen(PORT, () => {
-    console.log(`App running on port ${PORT}!`);
+
+// Listen on port 3000
+app.listen(3000, () => {
+    console.log(`App running on ${3000}`);
 });
