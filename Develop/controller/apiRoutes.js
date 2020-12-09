@@ -2,6 +2,7 @@
 const router = require ("express").Router();
 
 // require model
+const workout = require("../model/workout-schema");
 
 
 
