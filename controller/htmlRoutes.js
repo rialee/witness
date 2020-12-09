@@ -2,13 +2,6 @@
 const router = require ("express").Router();
 const path = require ("path");
 
-// home / route
-// router.get("/", (req, res) => {
-
-//     // display html file
-//     res.sendFile(path.join(__dirname, "../public/index.html"));
-// });
-
 // tracker route
 router.get("/exercise", (req, res) => {
 

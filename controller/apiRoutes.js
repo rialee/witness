@@ -4,13 +4,11 @@ const router = require("express").Router();
 // require model
 const Workout = require("../model/workout-schema.js");
 
-
-
 // get workouts
 router.get("/api/workouts", (req, res) => {
 
     // find() all workouts
-   Workout.find()
+    Workout.find()
 
         // res,json()
         .then(workoutsData => {
@@ -65,7 +63,6 @@ router.put("/api/workouts/:id", ({ body, params }, res) => {
 });
 
 
-
 // GET request workout history for display
 router.get("/api/workouts/range", (req, res) => {
 
@@ -74,13 +71,12 @@ router.get("/api/workouts/range", (req, res) => {
 
         // return res.json
         .then(workoutsData => {
-            console.log(workoutsData)
+            // console.log(workoutsData)
             res.json(workoutsData);
         })
-        
+
         // err handling
         .catch(err => res.json(err));
-
 });
 
 
